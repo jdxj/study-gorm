@@ -16,4 +16,4 @@
 
 .idea/
 
-key_test.go
+key/init.go

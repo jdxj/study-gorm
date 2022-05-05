@@ -1,4 +1,4 @@
-package main
+package gorm
 
 import (
 	"database/sql"
@@ -9,10 +9,8 @@ import (
 
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
-)
 
-const (
-	dsnTemp = "%s:%s@tcp(%s:3306)/test_study_gorm?charset=utf8mb4&parseTime=True&loc=Local"
+	"github.com/jdxj/study-gorm/key"
 )
 
 var (
@@ -21,8 +19,7 @@ var (
 )
 
 func TestMain(t *testing.M) {
-	dsn := fmt.Sprintf(dsnTemp, user, pass, host)
-	db, err := gorm.Open(mysql.Open(dsn))
+	db, err := gorm.Open(mysql.Open(key.DSN()))
 	if err != nil {
 		panic(err)
 	}
