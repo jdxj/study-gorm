@@ -10,6 +10,7 @@ import (
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 
+	"github.com/jdxj/study-gorm/er"
 	"github.com/jdxj/study-gorm/key"
 )
 
@@ -33,7 +34,7 @@ func TestMain(t *testing.M) {
 }
 
 func TestCreate(t *testing.T) {
-	user := &User{
+	user := &er.User{
 		Name:   "jdxj",
 		Gender: 1,
 		Phone:  "abc",
@@ -54,7 +55,7 @@ func TestTimeRounding(t *testing.T) {
 }
 
 func TestFind(t *testing.T) {
-	user := &User{}
+	user := &er.User{}
 	db := GormDB.Where("id = 1")
 
 	var c int64
