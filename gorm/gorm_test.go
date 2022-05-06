@@ -1,6 +1,7 @@
 package gorm
 
 import (
+	"context"
 	"database/sql"
 	"fmt"
 	"os"
@@ -52,6 +53,18 @@ func TestTimeRounding(t *testing.T) {
 	// output:
 	//     2022-04-24T13:49:34.891059+08:00
 	//     2022-04-24T13:49:35+08:00
+}
+
+func TestTake(t *testing.T) {
+	user := er.User{}
+	err := GormDB.WithContext(context.Background()).
+		Where("id = ?", 3).
+		Take(&user).
+		Error
+	if err != nil {
+		t.Fatalf("%s\n", err)
+	}
+	fmt.Printf("%+v\n", user)
 }
 
 func TestFind(t *testing.T) {
