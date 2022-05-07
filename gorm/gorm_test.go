@@ -1,6 +1,7 @@
 package gorm
 
 import (
+	"bytes"
 	"context"
 	"database/sql"
 	"fmt"
@@ -82,4 +83,16 @@ func TestFind(t *testing.T) {
 	}
 
 	fmt.Printf("%+v\n", user)
+}
+
+func TestMySQL_Dialector_quoteTo(t *testing.T) {
+	d := mysql.Dialector{}
+
+	buffer := bytes.NewBuffer(nil)
+	d.QuoteTo(buffer, "a.b")
+	//d.QuoteTo(buffer, "`a.b")
+	//d.QuoteTo(buffer, "a")
+	//d.QuoteTo(buffer, "a`b")
+
+	fmt.Println(buffer.String())
 }
